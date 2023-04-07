@@ -31,7 +31,7 @@ public class ScriptableCharacters : ScriptableObject
         get { return _damage; }
     }
 
-    [Tooltip("Desesa do Player")]
+    [Tooltip("Defesa do Player")]
     [SerializeField] int _playerArmor;
     public int playerArmor
     {
@@ -43,10 +43,10 @@ public class ScriptableCharacters : ScriptableObject
     {
         get { return _speed; } 
     }
-    [SerializeField] float _speedJump;
-    public float speedJump
+    [SerializeField] float _jump;
+    public float jump
     {
-        get { return _speedJump; }
+        get { return _jump; }
     }
 
     [Tooltip("Quantidade máxima de pontos de habilidade do Player")]
@@ -77,6 +77,9 @@ public class ScriptableCharacters : ScriptableObject
     {
         get { return _count; }
     }
+
+    [SerializeField] GameObject _projectile;
+    public GameObject projectile => _projectile;
 
     [SerializeField] GameObject _lifeBar;
     public GameObject lifeBar => _lifeBar;

@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 4968400858655572}
   - component: {fileID: 50481460737530802}
   - component: {fileID: 61293559322156938}
-  - component: {fileID: 114667584257292348}
-  - component: {fileID: 114767222085727894}
-  m_Layer: 9
+  - component: {fileID: -5368169736027478555}
+  m_Layer: 0
   m_Name: FireAttack
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -83,7 +82,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 5}
   m_EdgeRadius: 0
---- !u!114 &114667584257292348
+--- !u!114 &-5368169736027478555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,24 +91,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1118455661917594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 147d361f45d2c534cb6037b0d482c71b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9490dc26f37884443bb50a94b4135840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 2.3
---- !u!114 &114767222085727894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118455661917594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6110ce068cd36794abb49f6b497bf344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.7
-  damage: 10
+  _speed: 0.2
+  _damage: 1
 --- !u!1 &1847625674315366
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +107,7 @@ GameObject:
   - component: {fileID: 4128273445555020}
   - component: {fileID: 212619549051657874}
   - component: {fileID: 95355106819628082}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Fire
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -183,7 +169,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 843344161
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -198,7 +184,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &95355106819628082
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -215,7 +201,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4247277954925783457
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4709952447432705835}
   - component: {fileID: 6490374933334422687}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

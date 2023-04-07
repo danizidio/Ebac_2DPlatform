@@ -3,17 +3,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using SaveLoadPlayerPrefs;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
 {
+    [SerializeField] protected ScriptableCharacters _char;
+
     public event Action OnActing;
     public event Action OnPausing;
 
-    Rigidbody2D rb;
+    Rigidbody2D _rb;
 
-    [SerializeField] int _maxLife;
-    int _currentLife;
+    float _currentLife;
 
-    [SerializeField] float _walkSpeed;
     float _runSpeed;
     float _move;
     float _moveX;
@@ -32,37 +32,36 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Start()
     {
-        _runSpeed = _walkSpeed * 2;
-
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
 
         _canMove = true;
 
-        _currentLife = _maxLife;
+        _move = _char.speed;
+
+        _currentLife = _char.maxHealth;
+
+        OnActing = Attacking;
 
         _anim = GetComponentInChildren<Animator>();
     }
 
     void LateUpdate()
     {
-        if (OnActing == null)
-        {
-            OnActing = Attacking;
-        }
+        if (!_canMove) return;
 
         if (!_isRunning)
         {
             _isRunning = false;
-           _move = _walkSpeed;
+            _move = _char.speed;
         }
 
         if (_moveX == 0)
         {
-           // _anim.SetBool("WALK", false);
+            _anim.SetBool("WALK", false);
         }
         else
         {
-            //_anim.SetBool("WALK", true);
+            _anim.SetBool("WALK", true);
         }
 
         if (_canMove == false)
@@ -71,7 +70,9 @@ public class PlayerBehaviour : MonoBehaviour
             _moveY = 0;
         }
 
-        rb.velocity = new Vector2(_moveX * _runSpeed, this.gameObject.transform.position.y);
+        _anim.SetBool("JUMP", !IsOnGround());
+
+        transform.Translate(new Vector2(_moveX * _move * Time.deltaTime, 0));
     }
 
     #region - InputManager Buttons
@@ -92,28 +93,24 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    public void OnRun(InputAction.CallbackContext context)
-    {
-        _isRunning = context.ReadValueAsButton();
-
-        if (_isRunning)
-        {
-            _move = _runSpeed;
-        }
-        else
-        {
-            _runSpeed = _walkSpeed;
-        }
-    }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if(IsOnGround())
+            if (IsOnGround())
             {
-                rb.AddForce(new Vector2(this.gameObject.transform.position.x, (2000 * 10) + Time.deltaTime), ForceMode2D.Force);
+                _rb.AddForce(Vector2.up * _char.jump * 100, ForceMode2D.Force);
             }
+        }
+    }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        _isRunning = context.ReadValueAsButton();
+
+        if (context.ReadValueAsButton())
+        {
+            _move = _char.speed * 2;
         }
     }
 
@@ -133,6 +130,22 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void SpecialAttack1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _anim.SetTrigger("SPECIAL1");
+        }
+    }
+
+    public void SpecialAttack2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _anim.SetTrigger("SPECIAL2");
+        }
+    }
+
     #endregion
     public void Attacking()
     {
@@ -144,43 +157,32 @@ public class PlayerBehaviour : MonoBehaviour
         return _canMove = b;
     }
 
-    public void ReceiveDamage(int atk)
+    public void SufferDamage(int atk)
     {
         _currentLife -= atk;
 
-        if (_currentLife <= 0)
+        if (_currentLife < 1)
         {
-            GameBehaviour.OnNextGameState(GamePlayStates.GAMEOVER);
-        }
+            _anim.SetBool("DEAD", true);
+            _canMove = false;
 
-        if (transform.localScale.x == 1)
-        {
-            rb.AddForce(new Vector2(-100, 0), ForceMode2D.Impulse);
+            GameManager.OnNextGameState(GamePlayStates.GAMEOVER);
         }
-
-        if (transform.localScale.x == -1)
-        {
-            rb.AddForce(new Vector2(100, 0), ForceMode2D.Impulse);
-        }
-
-        _anim.SetTrigger("DAMAGED");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //EnemyBehaviour e = collision.gameObject.GetComponent<EnemyBehaviour>();
+        Component damageable = collision.gameObject.GetComponent(typeof(ICanBeDamaged));
 
-        //if (e != null)
-        //{
-        //    e.ReceiveDamage(_atkModifier);
-        //}
+        if (damageable == null) return;
+
+        damageable.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(800 * transform.localScale.x, 500), ForceMode2D.Force);
+
+        (damageable as ICanBeDamaged).SufferDamage(_char.damage);
     }
 
     public bool IsOnGround()
     {
-        return (Physics2D.Linecast(transform.position, _footDetector.position, 1 << LayerMask.NameToLayer("GROUND")) |
-               (Physics2D.Linecast(transform.position, _footDetector.position, 1 << LayerMask.NameToLayer("FLOATINGPLATFORM")) |
-               (Physics2D.Linecast(transform.position, _footDetector.position, 1 << LayerMask.NameToLayer("ACTORS")) |
-               (Physics2D.Linecast(transform.position, _footDetector.position, 1 << LayerMask.NameToLayer("PUSHPULL"))))));
+        return (Physics2D.Linecast(transform.position, _footDetector.position, 1 << LayerMask.NameToLayer("GROUND")));
     }
 }

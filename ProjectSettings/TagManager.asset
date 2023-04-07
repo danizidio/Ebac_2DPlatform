@@ -16,6 +16,9 @@ TagManager:
   - Fire
   - Weapon
   - Title_Menu
+  - PlayerRedBar
+  - PlayerBlueBar
+  - Global_Light
   layers:
   - Default
   - TransparentFX
@@ -25,9 +28,9 @@ TagManager:
   - UI
   - GROUND
   - FLOATINGPLATFORM
-  - 
-  - 
-  - 
+  - WALL
+  - PLAYER
+  - ENEMY
   - 
   - 
   - 
@@ -56,7 +59,7 @@ TagManager:
   - name: BACKGROUND
     uniqueID: 3541971767
     locked: 0
-  - name: SCENARIO
+  - name: SCENARIO_BACK
     uniqueID: 2110879987
     locked: 0
   - name: PLAYER
@@ -64,6 +67,9 @@ TagManager:
     locked: 0
   - name: ENEMIES
     uniqueID: 1496771585
+    locked: 0
+  - name: SCENARIO_FRONT
+    uniqueID: 1960420269
     locked: 0
   - name: FOREGROUND
     uniqueID: 2531250805
