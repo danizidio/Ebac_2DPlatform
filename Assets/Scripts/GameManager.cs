@@ -23,6 +23,8 @@ public class GameManager : GamePlayBehaviour
         {
             case GamePlayStates.INITIALIZING:
                 {
+                    _gameOverObj.SetActive(false);
+
                     CameraBehaviour.OnSearchingPlayer?.Invoke();
 
                     break;
