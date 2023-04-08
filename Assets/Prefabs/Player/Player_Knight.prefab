@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 167097711786511193}
   - component: {fileID: 7054979017562709178}
   m_Layer: 9
-  m_Name: Player
+  m_Name: Player_Knight
   m_TagString: Player
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -290,6 +290,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fbda02eb-ca70-44f6-ba3f-7e4044603b15
     m_ActionName: Player/Run[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9825bdd9-b527-4868-a4e9-696ae8f85cd0
+    m_ActionName: Player/SPECIAL2[/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

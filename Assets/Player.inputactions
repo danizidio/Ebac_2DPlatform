@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SPECIAL",
+                    "name": "SPECIAL1",
                     "type": "Button",
                     "id": "1b498a18-e0b9-4fd8-ac31-65e19c8580db",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SPECIAL2",
+                    "type": "Button",
+                    "id": "9825bdd9-b527-4868-a4e9-696ae8f85cd0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -244,7 +253,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SPECIAL",
+                    "action": "SPECIAL1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -256,6 +265,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fec56f5-0634-4d41-8356-fa99bf17f12b",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SPECIAL2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

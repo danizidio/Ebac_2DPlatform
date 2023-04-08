@@ -14,10 +14,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
 
     float _currentLife;
 
-    float _runSpeed;
     float _move;
     float _moveX;
-    float _moveY;
 
     bool _isRunning;
 
@@ -28,7 +26,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
 
     SaveLoad s;
 
-    Animator _anim;
+    protected Animator _anim;
 
     private void Start()
     {
@@ -67,7 +65,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
         if (_canMove == false)
         {
             _moveX = 0;
-            _moveY = 0;
         }
 
         _anim.SetBool("JUMP", !IsOnGround());
