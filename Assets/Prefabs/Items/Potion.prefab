@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeToRecover: {fileID: 11400000, guid: f80eaccf9686d504a8ec171b421c74e0, type: 2}
+  _particleFx: {fileID: 6745852142745823240, guid: a2d5aa1a551bb6447a088ecb84674097, type: 3}
 --- !u!50 &2003756047073174629
 Rigidbody2D:
   serializedVersion: 4
