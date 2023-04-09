@@ -5,7 +5,8 @@ using SaveLoadPlayerPrefs;
 
 public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
 {
-    [SerializeField] protected ScriptableCharacters _char;
+    [SerializeField] ScriptableCharacters _characterStats;
+    public ScriptableCharacters characterStats { get { return _characterStats; } }
 
     public event Action OnActing;
     public event Action OnPausing;
@@ -34,9 +35,17 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
 
         _canMove = true;
 
-        _move = _char.speed;
+        _move = _characterStats.speed;
 
-        _currentLife = _char.maxHealth;
+        _currentLife = _characterStats.maxHealth;
+
+        #region -- For Exercise purpouse only --
+        
+        _currentLife -= 3;
+
+        UpdateLife();
+
+        #endregion
 
         OnActing = Attacking;
 
@@ -50,7 +59,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
         if (!_isRunning)
         {
             _isRunning = false;
-            _move = _char.speed;
+            _move = _characterStats.speed;
         }
 
         if (_moveX == 0)
@@ -96,7 +105,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
         {
             if (IsOnGround())
             {
-                _rb.AddForce(Vector2.up * _char.jump * 100, ForceMode2D.Force);
+                _rb.AddForce(Vector2.up * _characterStats.jump * 100, ForceMode2D.Force);
             }
         }
     }
@@ -107,7 +116,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
 
         if (context.ReadValueAsButton())
         {
-            _move = _char.speed * 2;
+            _move = _characterStats.speed * 2;
         }
     }
 
@@ -158,6 +167,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
     {
         _currentLife -= atk;
 
+        UpdateLife();
+
         if (_currentLife < 1)
         {
             _anim.SetBool("DEAD", true);
@@ -175,7 +186,30 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
 
         damageable.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(800 * transform.localScale.x, 500), ForceMode2D.Force);
 
-        (damageable as ICanBeDamaged).SufferDamage(_char.damage);
+        (damageable as ICanBeDamaged).SufferDamage(_characterStats.damage);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Potion p = collision.collider.GetComponent<Potion>();
+
+        if (p == null)return;
+
+        _currentLife += p.lifeToRecover();
+
+        UpdateLife();
+
+        Destroy(p.gameObject);
+    }
+
+    float UpdateLife()
+    {
+        LifeUI.OnUpdateUI?.Invoke(_currentLife / characterStats.maxHealth);
+
+        if (_currentLife > characterStats.maxHealth) _currentLife = characterStats.maxHealth;
+        if (_currentLife < 0) _currentLife = 0;
+        
+        return _currentLife;
     }
 
     public bool IsOnGround()

@@ -7,16 +7,9 @@ public class GameManager : GamePlayBehaviour
     public static System.Action OnTakingCoins;
 
     [SerializeField] GameObject _gameOverObj;
-    [SerializeField] TMP_Text _coinTxt;
-
-    int _coins = 0;
 
     private void Start()
     {
-        OnTakingCoins = EarnCoins;
-
-        _coinTxt.text = _coins.ToString();
-
         OnNextGameState(GamePlayStates.INITIALIZING);
     }
 
@@ -86,12 +79,5 @@ public class GameManager : GamePlayBehaviour
                 OnNextGameState?.Invoke(GamePlayStates.GAMEPLAY);
             }
         }
-    }
-
-    void EarnCoins()
-    {
-        _coins++;
-
-        _coinTxt.text = _coins.ToString();
     }
 }

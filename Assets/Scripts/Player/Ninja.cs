@@ -29,7 +29,7 @@ public class Ninja : PlayerBehaviour
     {
         if (_currentDaggers <= 0) return;
 
-        GameObject temp = Instantiate(_char.projectile, new Vector3(_daggerSpawner.position.x, _daggerSpawner.position.y), Quaternion.identity);
+        GameObject temp = Instantiate(characterStats.projectile, new Vector3(_daggerSpawner.position.x, _daggerSpawner.position.y), Quaternion.identity);
         temp.GetComponent<Dagger>().MoveDirection(transform.localScale.x);
 
         RemoveDaggers();

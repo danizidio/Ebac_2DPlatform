@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ad469ccc2fea1498bcaa257e110204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _char: {fileID: 11400000, guid: ff95355569ae2c94ba43aa84d86354d3, type: 2}
+  _characterStats: {fileID: 11400000, guid: ff95355569ae2c94ba43aa84d86354d3, type: 2}
   _footDetector: {fileID: 170921181886759249}
   _canMove: 0
   _flameSpawner: {fileID: 162586595465882163}

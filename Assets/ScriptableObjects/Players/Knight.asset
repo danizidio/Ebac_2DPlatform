@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2089d3d5c180f084b824b67a067cf1a0, type: 3}
-  m_Name: Ninja
+  m_Name: Knight
   m_EditorClassIdentifier: 
   _characterName: 
-  _maxHealth: 10
+  _maxHealth: 20
   _maxMana: 5
   _damage: 5
   _playerArmor: 2
-  _speed: 8
-  _jump: 25
+  _speed: 5
+  _jump: 20
   _manaRegen: 0
   _criticalChance: 0
   _costMobility: 2
   _costShadow: 5
-  _projectile: {fileID: 1189952314418970, guid: 0fb65235c98945145bf8cb3d185532cf, type: 3}
+  _projectile: {fileID: 1118455661917594, guid: e8906f799838b704dac2e1a979026fac, type: 3}
   _lifeBar: {fileID: 1422481206296846, guid: 1fc9ed940ffe80f458ab2e88e148275e, type: 3}
   _damageText: {fileID: 1183408696410010, guid: c455619ef925f574fb8043c13229e23a, type: 3}

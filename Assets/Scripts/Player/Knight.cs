@@ -10,7 +10,7 @@ public class Knight : PlayerBehaviour
     [SerializeField] GameObject _shield;
     public void SummonFire()
     {
-        GameObject temp = Instantiate(_char.projectile, new Vector3(_flameSpawner.position.x, _flameSpawner.position.y), Quaternion.identity);
+        GameObject temp = Instantiate(characterStats.projectile, new Vector3(_flameSpawner.position.x, _flameSpawner.position.y), Quaternion.identity);
         temp.GetComponent<SpecialAttack>().MoveDirection(transform.localScale.x);
     }
 
