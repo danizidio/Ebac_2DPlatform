@@ -90,4 +90,13 @@ public class ScriptableCharacters : ScriptableObject
     { 
         get { return _damageText; } 
     }
+
+    [SerializeField] AudioClip[] _footSteps;
+    public AudioClip[] footSteps { get { return _footSteps; } }
+
+    [SerializeField] AudioClip[] _jumpSound;
+    public AudioClip[] jumpSound { get { return _jumpSound; } }
+
+    [SerializeField] AudioClip[] _abilitiesSounds;
+    public AudioClip[] abilitiesSound { get { return _abilitiesSounds; } }
 }

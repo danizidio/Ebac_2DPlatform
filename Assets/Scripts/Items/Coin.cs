@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour
 {
 
     [SerializeField] GameObject _particleFx;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameManager.OnTakingCoins?.Invoke();

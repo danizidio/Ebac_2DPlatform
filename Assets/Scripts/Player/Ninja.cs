@@ -20,6 +20,9 @@ public class Ninja : PlayerBehaviour
     {
         if (context.performed)
         {
+            _audio.clip = characterStats.abilitiesSound[UnityEngine.Random.Range(0, characterStats.abilitiesSound.Length)];
+            _audio.Play();
+
             _anim.SetTrigger("SPECIAL2");
             ThrowingDagger();
         }

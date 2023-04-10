@@ -29,6 +29,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
 
     protected Animator _anim;
 
+    [SerializeField] protected AudioSource _audio;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -105,6 +107,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
         {
             if (IsOnGround())
             {
+                _audio.clip = _characterStats.jumpSound[UnityEngine.Random.Range(0, _characterStats.jumpSound.Length)];
+                _audio.Play();
+
                 _rb.AddForce(Vector2.up * _characterStats.jump * 100, ForceMode2D.Force);
             }
         }
@@ -140,6 +145,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
     {
         if (context.performed)
         {
+            _audio.clip = _characterStats.abilitiesSound[UnityEngine.Random.Range(0, _characterStats.abilitiesSound.Length)];
+            _audio.Play();
+
             _anim.SetTrigger("SPECIAL1");
         }
     }
@@ -148,6 +156,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamaged
     {
         if (context.performed)
         {
+            _audio.clip = _characterStats.abilitiesSound[UnityEngine.Random.Range(0, _characterStats.abilitiesSound.Length)];
+            _audio.Play();
+
             _anim.SetTrigger("SPECIAL2");
         }
     }
